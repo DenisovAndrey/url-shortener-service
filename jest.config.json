@@ -1,0 +1,11 @@
+{
+  "testEnvironment": "node",
+  "transform": {
+    "^.+\\.ts$": "ts-jest"
+  },
+  "moduleFileExtensions": ["ts", "js"],
+  "testMatch": ["<rootDir>/test/**/*.test.ts"],
+  "coverageDirectory": "coverage",
+  "collectCoverageFrom": ["<rootDir>/src/**/*.ts"],
+  "coveragePathIgnorePatterns": ["<rootDir>/node_modules/"]
+}
