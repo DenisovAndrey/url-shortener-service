@@ -1,0 +1,50 @@
+openapi: 3.0.0
+info:
+  title: URL Shortener API
+  version: 1.0.0
+  description: API documentation for URL Shortener
+paths:
+  /url/encode:
+    get:
+      summary: Encode URL
+      parameters:
+        - name: url
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EncodeResponse'
+  /url/decode:
+    get:
+      summary: Decode URL
+      parameters:
+        - name: shortUrl
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DecodeResponse'
+components:
+  schemas:
+    EncodeResponse:
+      type: object
+      properties:
+        shortUrl:
+          type: string
+    DecodeResponse:
+      type: object
+      properties:
+        originalUrl:
+          type: string
