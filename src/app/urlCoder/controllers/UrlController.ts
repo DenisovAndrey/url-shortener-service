@@ -1,11 +1,12 @@
-import { type Request, type Response } from 'express'
 import { ShortUrlCoder } from '../helpers/ShortUrlEncoder'
+import { type Request } from '../../../types/Request'
+import { type Response } from '../../../types/Response'
 
 export class UrlController {
-  static encodeUrl (req: Request, res: Response): void {
+  static encodeUrl (req: Request<{ url: string }>, res: Response<{ shortUrl: string }>): void {
     const { url } = req.query
 
-    if (typeof url !== 'string') {
+    if (url === undefined) {
       res.status(400).json({ error: 'Missing URL parameter' })
       return
     }
@@ -14,10 +15,10 @@ export class UrlController {
     res.json({ shortUrl })
   }
 
-  static decodeUrl (req: Request, res: Response): void {
+  static decodeUrl (req: Request<{ shortUrl: string }>, res: Response<{ originalUrl: string }>): void {
     const { shortUrl } = req.query
 
-    if (typeof shortUrl !== 'string') {
+    if (shortUrl === undefined) {
       res.status(400).json({ error: 'Missing shortUrl parameter' })
       return
     }
