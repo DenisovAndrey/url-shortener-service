@@ -1,9 +1,10 @@
 import { Router } from 'express'
 import { UrlCoderPaths } from './routes/paths'
+import { UrlController } from './controllers/UrlController'
 
 const router = Router()
 
-router.get(UrlCoderPaths.ENCODE, (req, res) => res.status(200).json('ok from encode'))
-router.get(UrlCoderPaths.DECODE, (req, res) => res.status(200).json('ok from decode'))
+router.get(UrlCoderPaths.ENCODE, UrlController.encodeUrl)
+router.get(UrlCoderPaths.DECODE, UrlController.decodeUrl)
 
 export default router

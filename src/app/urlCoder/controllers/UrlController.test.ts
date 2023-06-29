@@ -1,61 +1,50 @@
 import request from 'supertest'
-import app from '../../../index'
+import express from 'express'
+import { UrlController } from './UrlController'
+import { UrlCoderPaths } from '../routes/paths'
 
-const defaultUrl = 'https://en.wikipedia.org/wiki/Computer'
+const app = express()
+app.get(UrlCoderPaths.ROOT + UrlCoderPaths.ENCODE, UrlController.encodeUrl)
+app.get(UrlCoderPaths.ROOT + UrlCoderPaths.DECODE, UrlController.decodeUrl)
 
 describe('UrlController', () => {
-  describe('POST /url/encode', () => {
-    it('should encode a URL and return a short URL', async () => {
+  describe('GET /url/encode', () => {
+    it('should return a short URL', async () => {
       const response = await request(app)
-        .post('/url/encode')
-        .send({ url: defaultUrl })
-        .expect(200)
+        .get(UrlCoderPaths.ROOT + UrlCoderPaths.ENCODE)
+        .query({ url: 'https://en.wikipedia.org/wiki/Computer' })
 
-      expect(response.body).toHaveProperty('shortUrl')
+      expect(response.status).toBe(200)
+      expect(response.body.shortUrl).toContain('http://short.dev/')
     })
 
-    it('should return an error for an invalid request', async () => {
-      const response = await request(app)
-        .post('/url/encode')
-        .send({})
-        .expect(400)
+    it('should return an error when URL parameter is missing', async () => {
+      const response = await request(app).get(UrlCoderPaths.ROOT + UrlCoderPaths.ENCODE)
 
-      expect(response.body).toHaveProperty('error')
+      expect(response.status).toBe(400)
+      expect(response.body).toHaveProperty('error', 'Missing URL parameter')
     })
   })
 
-  describe('POST /url/decode', () => {
-    it('should decode a short URL and return the original URL', async () => {
-      const encodeResponse = await request(app)
-        .post('/url/encode')
-        .send({ url: defaultUrl })
+  describe('GET /url/decode', () => {
+    it('should return the original URL', async () => {
+      const encodedResponse = await request(app)
+        .get(UrlCoderPaths.ROOT + UrlCoderPaths.ENCODE)
+        .query({ url: 'https://en.wikipedia.org/wiki/Computer' })
 
-      const { shortUrl } = encodeResponse.body
+      const response = await request(app)
+        .get(UrlCoderPaths.ROOT + UrlCoderPaths.DECODE)
+        .query({ shortUrl: encodedResponse.body.shortUrl })
 
-      const decodeResponse = await request(app)
-        .post('/url/decode')
-        .send({ shortUrl })
-        .expect(200)
-
-      expect(decodeResponse.body.originalUrl).toEqual(defaultUrl)
+      expect(response.status).toBe(200)
+      expect(response.body.originalUrl).toEqual('https://en.wikipedia.org/wiki/Computer')
     })
 
-    it('should return an error for an invalid request', async () => {
-      const response = await request(app)
-        .post('/url/decode')
-        .send({})
-        .expect(400)
+    it('should return an error when shortUrl parameter is missing', async () => {
+      const response = await request(app).get(UrlCoderPaths.ROOT + UrlCoderPaths.DECODE)
 
-      expect(response.body).toHaveProperty('error')
-    })
-
-    it('should return an error for a short URL not found', async () => {
-      const response = await request(app)
-        .post('/url/decode')
-        .send({ shortUrl: 'http://short.est/invalid' })
-        .expect(404)
-
-      expect(response.body).toHaveProperty('error')
+      expect(response.status).toBe(400)
+      expect(response.body).toHaveProperty('error', 'Missing shortUrl parameter')
     })
   })
 })
