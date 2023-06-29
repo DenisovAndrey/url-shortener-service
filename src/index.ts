@@ -9,3 +9,5 @@ app.listen(port, () => {
 })
 
 Controllers(app)
+
+export default app

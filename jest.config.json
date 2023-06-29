@@ -3,9 +3,18 @@
   "transform": {
     "^.+\\.ts$": "ts-jest"
   },
-  "moduleFileExtensions": ["ts", "js"],
-  "testMatch": ["<rootDir>/test/**/*.test.ts"],
+  "moduleFileExtensions": [
+    "ts",
+    "js"
+  ],
+  "testMatch": [
+    "<rootDir>/src/**/*.test.ts"
+  ],
   "coverageDirectory": "coverage",
-  "collectCoverageFrom": ["<rootDir>/src/**/*.ts"],
-  "coveragePathIgnorePatterns": ["<rootDir>/node_modules/"]
+  "collectCoverageFrom": [
+    "<rootDir>/src/**/*.ts"
+  ],
+  "coveragePathIgnorePatterns": [
+    "<rootDir>/node_modules/"
+  ]
 }
