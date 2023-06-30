@@ -24,7 +24,7 @@ export class UrlController {
     }
 
     const originalUrl = ShortUrlCoder.getOriginalUrl(shortUrl)
-    if (originalUrl === null) {
+    if (originalUrl === null || originalUrl === '') {
       res.status(400).json({ error: 'Short URL not found' })
       return
     }
