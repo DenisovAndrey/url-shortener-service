@@ -21,10 +21,10 @@ export class ShortUrlCoder {
     return shortUrl
   }
 
-  static getOriginalUrl (shortUrl: string): string | null {
+  static getOriginalUrl (shortUrl: string): string {
     const encodedHash = shortUrl.replace(this.BASE_URL, '')
     const url = this.hashCache.get(encodedHash)
-    return url ?? null
+    return url !== undefined ? url : ''
   }
 
   private static generateEncodedHash (url: string): string {
@@ -37,7 +37,7 @@ export class ShortUrlCoder {
     for (let i = 0; i < this.ENCODED_LENGTH; i++) {
       const index = hash & 0x3f // Take the last 6 bits of the hash
       encoded += this.ALPHABET[index]
-      hash >>>= 6 // Shift the hash 6 bits to the right
+      hash = hash >>> 6 // Shift the hash 6 bits to the right
     }
 
     return encoded
