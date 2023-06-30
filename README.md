@@ -29,7 +29,7 @@ The URL Shortener is designed to serve the following audience:
 
 To get started with the URL Shortener, follow the steps below:
 
-1. Clone the repository: `git clone <repository-url>`
+1. Clone the repository: `git clone https://github.com/DenisovAndrey/url-shortener-service`
 2. Install dependencies: `npm install`
 3. Configure the database settings in the `config.js` file.
 4. Start the server: `npm start`
