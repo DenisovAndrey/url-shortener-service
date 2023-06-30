@@ -16,8 +16,9 @@ To get started with the URL Shortener, follow the steps below:
 2. Install dependencies:
     1. Switch to Node 18
     2. Run `npm install`
-3. Start the server: `npm start:dev`
-4. Access the URL Shortener interface by visiting `http://localhost:3001` in your web browser. (or setup port
+3. Fill out the url address of frontend app if needed to env variable `ALLOWED_ORIGINS`
+4. Start the server: `npm start:dev`
+5. Access the URL Shortener interface by visiting `http://localhost:3001/api-docs` in your web browser. (or setup port
    in `process.env.PORT`)
 
 ## Available Scripts
