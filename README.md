@@ -25,16 +25,6 @@ The URL Shortener is designed to serve the following audience:
 - General users who need to shorten URLs for personal or professional purposes.
 - Developers who want to integrate the URL shortening functionality into their own applications or services.
 
-## Getting Started
-
-To get started with the URL Shortener, follow the steps below:
-
-1. Clone the repository: `git clone https://github.com/DenisovAndrey/url-shortener-service`
-2. Install dependencies: `npm install`
-3. Configure the database settings in the `config.js` file.
-4. Start the server: `npm start`
-5. Access the URL Shortener interface by visiting `http://localhost:3000` in your web browser.
-
 ## Development
 
 The documentation is available in [README_DEV.md](./README_DEV.md)
