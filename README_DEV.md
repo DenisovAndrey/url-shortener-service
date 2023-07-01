@@ -17,7 +17,7 @@ To get started with the URL Shortener, follow the steps below:
     1. Switch to Node 18
     2. Run `npm install`
 3. Fill out the url address of frontend app if needed to env variable `ALLOWED_ORIGINS`
-4. Start the server: `npm start:dev`
+4. Start the server: `npm run start:dev`
 5. Access the URL Shortener interface by visiting `http://localhost:3001/api-docs` in your web browser. (or setup port
    in `process.env.PORT`)
 
@@ -27,7 +27,7 @@ In the project directory, you can run:
 
 ### `npm run start:dev`
 
-Runs the script in the development mode.
+Runs the project in the development mode.
 
 ### `npm run build`
 
