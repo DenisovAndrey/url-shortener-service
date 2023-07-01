@@ -25,6 +25,21 @@ The URL Shortener is designed to serve the following audience:
 - General users who need to shorten URLs for personal or professional purposes.
 - Developers who want to integrate the URL shortening functionality into their own applications or services.
 
+## Next steps (TBD)
+
+As a next steps of this project we need to:
+
+1. Define proper docker config and ci/cd.
+2. Resolve URLs and dynamic data via environment variables
+3. Implement contract testing
+4. Define proper architecture including
+    1. scalability strategy
+    2. load balancing
+    3. deployment strategy
+    4. Databases
+    5. Message queues
+    6. etc...
+
 ## Development
 
 The documentation is available in [README_DEV.md](./README_DEV.md)
