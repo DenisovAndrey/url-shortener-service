@@ -28,16 +28,21 @@ export class ShortUrlCoder {
   }
 
   private static generateEncodedHash (url: string): string {
-    let hash = 0
+    let hash = 0n
     for (let i = 0; i < url.length; i++) {
-      hash = (hash * 31 + url.charCodeAt(i)) | 0
+      hash = (hash * 31n + BigInt(url.charCodeAt(i))) % (62n ** BigInt(this.ENCODED_LENGTH))
     }
 
     let encoded = ''
-    for (let i = 0; i < this.ENCODED_LENGTH; i++) {
-      const index = hash & 0x3f // Take the last 6 bits of the hash
-      encoded += this.ALPHABET[index]
-      hash = hash >>> 6 // Shift the hash 6 bits to the right
+    while (hash > 0n) {
+      const index = Number(hash % 62n)
+      encoded = this.ALPHABET[index] + encoded
+      hash = hash / 62n
+    }
+
+    // Pad the encoded string with leading zeros if necessary
+    while (encoded.length < this.ENCODED_LENGTH) {
+      encoded = this.ALPHABET[0] + encoded
     }
 
     return encoded
