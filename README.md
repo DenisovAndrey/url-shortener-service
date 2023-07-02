@@ -33,12 +33,13 @@ As a next steps of this project we need to:
 2. Resolve URLs and dynamic data via environment variables
 3. Implement contract testing
 4. Define proper architecture including
-    1. scalability strategy
-    2. load balancing
-    3. deployment strategy
-    4. Databases
-    5. Message queues
-    6. etc...
+    1. Configure redirect to "long" url via 301 code, when use goes by short url
+    2. scalability strategy
+    3. load balancing
+    4. deployment strategy
+    5. Databases
+    6. Message queues
+    7. etc...
 
 ## Development
 
