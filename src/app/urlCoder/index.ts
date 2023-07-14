@@ -1,3 +1,3 @@
-import router from './services/UrlService'
+import router from './controllers/UrlController'
 
 export default router

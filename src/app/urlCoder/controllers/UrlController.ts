@@ -1,34 +1,11 @@
-import { ShortUrlCoder } from '../helpers/ShortUrlEncoder'
-import { type Request } from '../../../types/Request'
-import { type Response } from '../../../types/Response'
+import { Router } from 'express'
+import { UrlCoderPaths } from '../routes/paths'
+import { encodeUrl } from '../actions/encodingAction'
+import { decodeUrl } from '../actions/decodingAction'
 
-export class UrlController {
-  static encodeUrl (req: Request<{ url: string }>, res: Response<{ shortUrl: string }>): void {
-    const { url } = req.query
+const router = Router()
 
-    if (url === undefined) {
-      res.status(400).json({ error: 'Missing URL parameter' })
-      return
-    }
+router.get(UrlCoderPaths.ENCODE, encodeUrl)
+router.get(UrlCoderPaths.DECODE, decodeUrl)
 
-    const shortUrl = ShortUrlCoder.generateShortUrl(url)
-    res.json({ shortUrl })
-  }
-
-  static decodeUrl (req: Request<{ shortUrl: string }>, res: Response<{ originalUrl: string }>): void {
-    const { shortUrl } = req.query
-
-    if (shortUrl === undefined) {
-      res.status(400).json({ error: 'Missing shortUrl parameter' })
-      return
-    }
-
-    const originalUrl = ShortUrlCoder.getOriginalUrl(shortUrl)
-    if (originalUrl === null || originalUrl === '') {
-      res.status(400).json({ error: 'Short URL not found' })
-      return
-    }
-
-    res.json({ originalUrl })
-  }
-}
+export default router

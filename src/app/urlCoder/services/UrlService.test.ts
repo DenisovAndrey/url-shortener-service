@@ -1,4 +1,4 @@
-import { ShortUrlCoder } from './ShortUrlEncoder'
+import { UrlService } from './UrlService'
 
 describe('ShortUrlGenerator', () => {
   describe('generateShortUrl', () => {
@@ -14,11 +14,11 @@ describe('ShortUrlGenerator', () => {
     testCases.forEach(testUrl => {
       let encodedUrl: string
       it(`should encode a short URL : ${testUrl}`, () => {
-        encodedUrl = ShortUrlCoder.generateShortUrl(testUrl)
+        encodedUrl = UrlService.generateShortUrl(testUrl)
         expect(encodedUrl).toContain('http://short.dev')
       })
       it(`should decode a short URL : ${testUrl}`, () => {
-        const decodedUrl = ShortUrlCoder.getOriginalUrl(encodedUrl)
+        const decodedUrl = UrlService.getOriginalUrl(encodedUrl)
         expect(decodedUrl).toEqual(testUrl)
       })
     })
